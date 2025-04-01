@@ -1,0 +1,12 @@
+stages:
+  data_ingestion:
+    cmd: python src/datas/data_ingestion.py
+ 
+    deps:
+    - data/external
+    - src/datas/data_ingestion.py
+    params:
+    - Data_ingestion.test_size
+
+    outs:
+    - data/raw
