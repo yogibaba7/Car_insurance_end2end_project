@@ -1,7 +1,7 @@
 stages:
   data_ingestion:
     cmd: python src/datas/data_ingestion.py
- 
+
     deps:
     - data/external
     - src/datas/data_ingestion.py
@@ -10,3 +10,11 @@ stages:
 
     outs:
     - data/raw
+  data_preprocessing:
+    cmd: python src/datas/data_preprocessing.py
+    deps:
+    - data/raw
+    - src/datas/data_preprocessing.py
+    outs:
+    - data/interim
+    - models/scaler.pkl

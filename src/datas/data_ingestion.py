@@ -30,7 +30,7 @@ def load_params(parameter):
 def load_data(path:str)->pd.DataFrame:
     try:
         logger.debug(f"loading data from {path}")
-        df = pd.read_csv(path)
+        df = pd.read_csv(path,index_col=False)
         logger.debug(f"data loaded successfully")
         return df
     except Exception as e:
@@ -68,8 +68,8 @@ def save_data(path:str,training_data:pd.DataFrame,testing_data:pd.DataFrame)->No
         os.makedirs(path,exist_ok=True)
         logger.debug('directory created sucessfully')
         logger.debug(f"saving data on {path}")
-        training_data.to_csv(os.path.join(path,'train.csv'))
-        testing_data.to_csv(os.path.join(path,'test.csv'))
+        training_data.to_csv(os.path.join(path,'train.csv'),index=False)
+        testing_data.to_csv(os.path.join(path,'test.csv'),index=False)
         logger.debug(f"data save successfully on path {path}")
     except Exception as e:
         logger.error(f"{e}")
