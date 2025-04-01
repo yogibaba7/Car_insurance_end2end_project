@@ -21,7 +21,7 @@ def load_params(parameter):
     try:
         with open('params.yaml','r') as file:
             file = yaml.safe_load(file)
-            parameter = file['Data_ingestion'][parameter]
+            parameter = file['Data_ingestion'][parameter] # there should be data_preprocessing params at this time i leave it .
             return parameter
         logger.debug(f"{parameter} successfully fetched")
     except Exception as e:

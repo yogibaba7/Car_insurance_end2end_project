@@ -18,3 +18,11 @@ stages:
     outs:
     - data/interim
     - models/scaler.pkl
+  feature_engineering:
+    cmd: python src/features/feature_engineering.py
+    deps:
+    - data/interim
+    - src/features/feature_engineering.py
+    outs:
+    - data/processed
+    - models/encoder.pkl
