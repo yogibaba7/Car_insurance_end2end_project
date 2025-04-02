@@ -4,7 +4,8 @@ import os
 import joblib
 import logging
 import json
-
+from dvclive import Live
+import yaml
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score , recall_score, precision_score , roc_auc_score
 
@@ -16,8 +17,6 @@ handler.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-
-
 
 
 def load_data(path:str)->pd.DataFrame:
@@ -73,11 +72,22 @@ def main():
     test_data = load_data(data_path)
     model = model_loading()
     scores = check_score(model,'claim',test_data)
-    return scores
-
-
     
+    with Live(save_dvc_exp=True) as live:
+        for name,value in scores.items():
+            live.log_metric(name,value)  
+
+    with open('params.yaml','r') as file:
+        file = yaml.safe_load(file)
+    
+        with Live(save_dvc_exp=True) as live:
+            for key,value in file.items():
+                for name,val in value.items():
+                    live.log_param(name,val)
+    # with Live(save_dvc_exp=True) as live:
+        
+            
 
 if __name__=='__main__':
-    scores = main()
-    print(scores)
+    main()
+        

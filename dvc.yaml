@@ -38,10 +38,12 @@ stages:
     outs:
     - models/model.pkl
   model_evaluation:
-    cmd:  python src/model/model_evaluation.py
+    cmd: python src/model/model_evaluation.py
     deps:
     - data/processed
     - models/model.pkl
     - src/model/model_building.py
     metrics:
     - reports/metrics.json
+params:
+- dvclive/params.yaml

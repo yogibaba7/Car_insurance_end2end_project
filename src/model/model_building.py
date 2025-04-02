@@ -16,12 +16,12 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-def load_params(parameter):
+def load_params():
     logger.debug('loading parameters file')
     try:
         with open('params.yaml','r') as file:
             file = yaml.safe_load(file)
-            parameter = file['Model_building'][parameter] 
+            parameter = file['Model_building']
             return parameter
         logger.debug(f"{parameter} successfully fetched")
     except Exception as e:
@@ -52,10 +52,8 @@ def model_training(data:pd.DataFrame,target:str,parameters:dict)->None:
 # main 
 def main():
     # load parameters
-    parameters = ['n_estimator','max_depth','learning_rate']
-    param_dict = {}
-    for param in parameters:
-        param_dict[param] = load_params(param)
+
+    param_dict = load_params()
     
     # load data
     data_path = 'data/processed/train_featured.csv'
