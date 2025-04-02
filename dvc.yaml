@@ -26,3 +26,14 @@ stages:
     outs:
     - data/processed
     - models/encoder.pkl
+  model_building:
+    cmd: python src/model/model_building.py
+    deps:
+    - data/processed
+    - src/model/model_building.py
+    params:
+    - Model_building.n_estimator
+    - Model_building.max_depth
+    - Model_building.learning_rate
+    outs:
+    - models/model.pkl
