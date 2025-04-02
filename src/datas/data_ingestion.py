@@ -50,7 +50,7 @@ def create_target(data:pd.DataFrame)->pd.DataFrame:
     except Exception as e:
         logger.error(f"{e}")
 
-def tran_test_split(data:pd.DataFrame,test_size:float)->tuple[pd.DataFrame]:
+def tran_test_split(data:pd.DataFrame,test_size:float,random_state=42)->tuple[pd.DataFrame]:
     try:
         logger.debug('creating training and testing set')
         X_train,X_test = train_test_split(data,test_size=test_size)
