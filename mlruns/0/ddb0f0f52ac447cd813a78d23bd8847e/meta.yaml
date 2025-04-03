@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/ddb0f0f52ac447cd813a78d23bd8847e/artifacts
+end_time: 1743582972797
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ddb0f0f52ac447cd813a78d23bd8847e
+run_name: smiling-cat-142
+run_uuid: ddb0f0f52ac447cd813a78d23bd8847e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743582972627
+status: 3
+tags: []
+user_id: Yogesh

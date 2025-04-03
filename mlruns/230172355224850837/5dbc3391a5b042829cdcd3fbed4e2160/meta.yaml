@@ -1,0 +1,16 @@
+artifact_uri: file:///C:/Users/Yogesh/Desktop/mlops/Car_insurance_end2end_project/mlruns/230172355224850837/5dbc3391a5b042829cdcd3fbed4e2160/artifacts
+deleted_time: 1743581710322
+end_time: 1743581323425
+entry_point_name: ''
+experiment_id: '230172355224850837'
+lifecycle_stage: deleted
+run_id: 5dbc3391a5b042829cdcd3fbed4e2160
+run_name: ambitious-moose-819
+run_uuid: 5dbc3391a5b042829cdcd3fbed4e2160
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743581323261
+status: 3
+tags: []
+user_id: Yogesh

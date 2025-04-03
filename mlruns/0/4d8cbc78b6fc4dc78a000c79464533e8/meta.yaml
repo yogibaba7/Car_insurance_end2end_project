@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/4d8cbc78b6fc4dc78a000c79464533e8/artifacts
+end_time: 1743583371722
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4d8cbc78b6fc4dc78a000c79464533e8
+run_name: learned-cow-664
+run_uuid: 4d8cbc78b6fc4dc78a000c79464533e8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743583371547
+status: 3
+tags: []
+user_id: Yogesh

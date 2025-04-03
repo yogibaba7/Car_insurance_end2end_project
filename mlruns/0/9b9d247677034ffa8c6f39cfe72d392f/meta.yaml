@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/9b9d247677034ffa8c6f39cfe72d392f/artifacts
+end_time: 1743583384110
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9b9d247677034ffa8c6f39cfe72d392f
+run_name: luxuriant-gnat-768
+run_uuid: 9b9d247677034ffa8c6f39cfe72d392f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743583371756
+status: 4
+tags: []
+user_id: Yogesh

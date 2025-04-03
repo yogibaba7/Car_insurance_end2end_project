@@ -9,6 +9,15 @@ import yaml
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score , recall_score, precision_score , roc_auc_score
 
+
+# configure dagshub
+import mlflow
+import dagshub
+dagshub.init(repo_owner='yogibaba7', repo_name='Car_insurance_end2end_project', mlflow=True)
+# creating experiment
+mlflow.set_experiment('experiment1')
+
+
 # configure logging
 logger = logging.getLogger('model_evaluation_log')
 logger.setLevel(logging.DEBUG)
@@ -60,33 +69,41 @@ def check_score(model:GradientBoostingClassifier,target,data:pd.DataFrame)->tupl
         with open('reports/metrics.json', 'w') as f:
             json.dump(scores, f, indent=4)  # `indent=4` makes it more readable
         logger.debug('Score Stored on reports/metrics.json')
+
+        # log metrics
+        
+        mlflow.log_metrics(scores)
+        mlflow.log_artifact(__file__)
         return scores
     except Exception as e:
         logger.debug(f"{e}")
 
 
 # main
-
 def main():
-    data_path = 'data/processed/test_featured.csv'
-    test_data = load_data(data_path)
-    model = model_loading()
-    scores = check_score(model,'claim',test_data)
+    # get the run_id 
+    try:
+        with open('run_id.txt','r') as file:
+            run_id = file.read().strip()
+    except :
+        run_id = None
     
-    with Live(save_dvc_exp=True) as live:
-        for name,value in scores.items():
-            live.log_metric(name,value)  
+    with mlflow.start_run(run_id=run_id , nested=False) as parent_run:
 
-    with open('params.yaml','r') as file:
-        file = yaml.safe_load(file)
-    
-        with Live(save_dvc_exp=True) as live:
-            for key,value in file.items():
-                for name,val in value.items():
-                    live.log_param(name,val)
-    # with Live(save_dvc_exp=True) as live:
+        data_path = 'data/processed/test_featured.csv'
+        test_data = load_data(data_path)
+        model = model_loading()
+        scores = check_score(model,'claim',test_data)
         
-            
+        with Live(save_dvc_exp=True) as live:
+            for name,value in scores.items():
+                live.log_metric(name,value)  
+
+        # add tags
+        mlflow.set_tag('author','yogesh')
+        mlflow.set_tag('version','v1.0')
+        mlflow.set_tag('model','baseline')
+                    
 
 if __name__=='__main__':
     main()

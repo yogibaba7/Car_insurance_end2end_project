@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/fe344fb64ad646bfbf08c35fa67a4ea6/artifacts
+end_time: 1743581935919
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: fe344fb64ad646bfbf08c35fa67a4ea6
+run_name: agreeable-shrike-953
+run_uuid: fe344fb64ad646bfbf08c35fa67a4ea6
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743581935730
+status: 3
+tags: []
+user_id: Yogesh

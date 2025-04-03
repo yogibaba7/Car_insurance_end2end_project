@@ -3,8 +3,15 @@ import numpy as np
 import logging 
 import os 
 import joblib
+import mlflow
 import yaml
 from sklearn.ensemble  import GradientBoostingClassifier
+
+# configure dagshub
+import mlflow
+import dagshub
+dagshub.init(repo_owner='yogibaba7', repo_name='Car_insurance_end2end_project', mlflow=True)
+mlflow.set_experiment('experiment1')
 
 
 # configure logging
@@ -32,6 +39,10 @@ def load_data(path:str)->pd.DataFrame:
         logger.debug(f"loading data from {path}")
         df = pd.read_csv(path,index_col=False)
         logger.debug(f"data loaded successfully")
+        # log input data
+        
+        log_train_df = mlflow.data.from_pandas(df)
+        mlflow.log_input(log_train_df,'train')
         return df
     except Exception as e:
         logger.error(f"loading data unsuccessfull -> {e}")
@@ -39,6 +50,7 @@ def load_data(path:str)->pd.DataFrame:
 
 def model_training(data:pd.DataFrame,target:str,parameters:dict)->None:
     try:
+        
         logger.debug('Creating GradientBoostingClassifier object')
         gbc = GradientBoostingClassifier(n_estimators=parameters['n_estimator'],max_depth=parameters['max_depth'],learning_rate=parameters['learning_rate'])
         logger.debug('Training the Model')
@@ -46,21 +58,34 @@ def model_training(data:pd.DataFrame,target:str,parameters:dict)->None:
         logger.debug('Saving the model as models/model.pkl')
         joblib.dump(gbc,'models/model.pkl')
         logger.debug('Model Trained Successfully')
+        # log model
+        mlflow.sklearn.log_model(gbc,'GradientBoostingClassifier')
+        # log parameters
+        mlflow.log_params(parameters)
     except Exception as e:
         logger.error(f"{e}")
 
 # main 
 def main():
-    # load parameters
-
-    param_dict = load_params()
+    with mlflow.start_run(nested=False) as parent_run:
+        # get the experiment id in a text file
+        parent_run_id = parent_run.info.run_id
+        with open('run_id.txt','w') as file:
+            file.write(parent_run_id)
+        
+        # log the run_id
+        mlflow.log_artifact('run_id.txt')
     
-    # load data
-    data_path = 'data/processed/train_featured.csv'
-    train_data = load_data(data_path)
+        # load parameters
 
-    # train model 
-    model_training(train_data,'claim',param_dict)
+        param_dict = load_params()
+        
+        # load data
+        data_path = 'data/processed/train_featured.csv'
+        train_data = load_data(data_path)
+
+        # train model 
+        model_training(train_data,'claim',param_dict)
 
     
     

@@ -2,6 +2,7 @@ myvenv
 data
 models
 reports
+run_id.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

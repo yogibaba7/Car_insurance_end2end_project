@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/d601d8ae8ee34f1f9438f6a0459a2939/artifacts
+end_time: 1743581665247
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d601d8ae8ee34f1f9438f6a0459a2939
+run_name: unleashed-yak-234
+run_uuid: d601d8ae8ee34f1f9438f6a0459a2939
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743581665087
+status: 3
+tags: []
+user_id: Yogesh
